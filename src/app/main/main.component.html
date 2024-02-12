@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">S
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In | Ludiflex</title>
+    <link rel="stylesheet" href="main.component.css">
+    <!-- ROBOTO FONT -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap">
+    <!-- POPPINS FONT -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap">
+</head>
+<app-map-screen ></app-map-screen>
+<div>
+    <button type="button" (click)="logOut()">Cerrar Sesión</button>
+</div>
+
+<body *ngIf="!map">
+    
+        
+        <div class="input-box">
+            <div class="login-box">
+                <div class="login-header" *ngIf="user">
+                    <header>{{user.name}} Select your favorite Hobbies :</header>
+                </div>
+                <ul *ngFor="let category of datos; index as i;">
+                    <li>
+                        <div class="input-box">
+                            <input type="checkbox" class="input-field" id="email" autocomplete="off" required (change)="getAlbumId($event,category )" [checked]="category.checked">
+                            <label for="email">{{category.name}}</label>
+                        </div>
+                    </li>
+                </ul>
+                <input (click)="mapIsReady()" type="submit" class="input-submit" value="Let's go">
+            </div>
+        </div>
+
+</body>
+</html>

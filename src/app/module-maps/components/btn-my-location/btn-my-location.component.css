@@ -1,0 +1,14 @@
+button{
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    color: #FFF;
+    background: #0000FF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 12px;
+
+}

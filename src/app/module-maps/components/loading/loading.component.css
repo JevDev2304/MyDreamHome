@@ -1,0 +1,14 @@
+.loading-map{
+    position: absolute;
+    place-self: left;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: black;
+    height:100000000px;
+    width: 100000px;
+    margin-left: 128px;
+    margin-right: 64px;
+    right:0px;
+    top:0px;
+    z-index: 0;
+
+}
