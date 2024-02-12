@@ -11,7 +11,9 @@ export class CategoriesService {
   categories: { [id: number]: Category; } = {
     0 : {name:"⚽  Sport"},
     1 : {name:"👜 Shopping"},
-    2 : {name:"📽️  Cinema(NOT WORKING)"},
-    3 : {name:"🏛️  Museum(NOT WORKING)"}
+    2 : {name:"📖  Libraries"},
+    3 : {name:"🏋️  Gym"},
+    4 : {name:"🌳  Parks"},
+    5 : {name:"🏛️ Museums"}
  };
 }

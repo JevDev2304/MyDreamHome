@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Output, inject, OnInit } from '@angular/core';
 import { CategoriesService } from '../services/categories.service';
 import { Category } from '../models/category.model';
 
@@ -11,21 +11,24 @@ export class CategoriesComponent {
   categoriesService: CategoriesService = inject(CategoriesService)
   @Output() categoriesEvent = new EventEmitter<number[]>();
   categoriesChecked: number[] = []
+  categories: { [id: number]: Category; } = {};
 
-  categories: { [id: number]: Category; } = this.categoriesService.categories
 
-  getAlbumId(e:any, category:number)
+  constructor(){
+    this.categories = this.categoriesService.categories;
+    console.log(this.categories);
+  }
+
+  getAlbumId(e:any, category:string)
   {
     if(e.target.checked)
     {
-        console.log(category + 'checked');
-        this.categoriesChecked.push(category);
+        this.categoriesChecked.push(parseInt(category));
     }
     else
     {
-        console.log(category + 'Unchecked');
-        this.categoriesChecked = this.categoriesChecked.filter(m=>m!=category);
+        this.categoriesChecked = this.categoriesChecked.filter(m=>m!=parseInt(category));
     }
-    this.categoriesEvent.emit(this.categoriesChecked);
+    this.categoriesEvent.emit(this.categoriesChecked); 
   }
 }

@@ -4,5 +4,5 @@ export interface House{
     phone: string;
     direction: [number, number];
     image: string;
-    price: number;
+    precio: string;
 }

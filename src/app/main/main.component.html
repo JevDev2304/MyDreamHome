@@ -12,7 +12,8 @@
 </head>
 <app-map-screen [checkedCategories]="currentCheckedCategories"></app-map-screen>
 <div>
-    <button type="button" (click)="logOut()">Cerrar Sesión</button>
+    <button type="button" (click)="logOut()">Log Out</button>
+    <button type="button" style="right:280px" (click)="restart()">Restart</button>
 </div>
 
 <body *ngIf="!map">
@@ -22,8 +23,9 @@
                 <header>{{user.name}} Select your favorite Hobbies :</header>
             </div>
             <app-categories (categoriesEvent)="updateCheckedCategories($event)"></app-categories>
+            <input (click)="mapIsReady()" type="submit" class="input-submit" value="Let's go">
         </div>
-        <input (click)="mapIsReady()" type="submit" class="input-submit" value="Let's go">
+        
     </div>
 </body>
 </html>

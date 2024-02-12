@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ViewChild,ElementRef, inject, Input} from '@angular/core';
+import { Component, AfterViewInit, ViewChild,ElementRef, inject, Input, OnChanges, SimpleChanges} from '@angular/core';
 import { MapService, PlacesService ,DistanceService} from '../../services';
 import { Map , Popup, Marker, LngLatLike} from 'mapbox-gl';
 import { MainComponent } from '../../../main/main.component';
@@ -10,7 +10,8 @@ import { HobbiesService } from '../../../services/hobbies.service';
   templateUrl: './map-view.component.html',
   styleUrl: './map-view.component.css'
 })
-export class MapViewComponent implements AfterViewInit{
+export class MapViewComponent implements AfterViewInit, OnChanges{
+  map!: Map;
 
   @ViewChild('mapDiv')
   mapDivElement!: ElementRef
@@ -21,13 +22,18 @@ export class MapViewComponent implements AfterViewInit{
     private mainComponent : MainComponent,
   ){}
 
+  // TO DO's: 
+  // marcadores hobbies
+  // botón nueva búsqueda
+  // cuadrar las opciones de los nuevos hobbies
+
   @Input() checkedCategories: number[] = [];
 
   housingService: HousesService = inject(HousesService)
   hobbiesService: HobbiesService = inject(HobbiesService)
 
   ngAfterViewInit(): void {  if(!this.placesService.userLocation) throw Error("No hay placesService.userLocation")
-  const map = new Map({
+  this.map = new Map({
     container: this.mapDivElement.nativeElement, // container ID
     style: 'mapbox://styles/mapbox/streets-v12', // style URL
     center: this.placesService.userLocation, // starting position [lng, lat]
@@ -40,51 +46,47 @@ export class MapViewComponent implements AfterViewInit{
   new Marker({color: 'red'})
     .setLngLat(this.placesService.userLocation)
     .setPopup(popup)
-    .addTo(map)
-    let i, j,k: number;
+    .addTo(this.map)
 
-  const userPosition = this.placesService.userLocation
-
-  for (i = 0; i < this.housingService.houses.length; i++) {
-    for (k = 0; k< this.hobbiesService.sports.length; k++){
-      if (this.distanceService.calcularDistancia(userPosition, this.housingService.houses[i].direction) <= 1) {
-        for (let category of this.mainComponent.datos) {
-          if (category.checked && category.id === 0) {
-            if (this.distanceService.calcularDistancia(this.housingService.houses[i].direction, this.hobbiesService.sports[k].direction) <= 1) {
-              let popup = new Popup()
-                .setHTML(`<h6>Casa de ${this.housingService.houses[i].contact}</h6>
-                          <p>Contacto: ${this.housingService.houses[i].phone} </p>`);
-              new Marker({ color: 'blue' })
-                .setLngLat(this.housingService.houses[i].direction)
-                .setPopup(popup)
-                .addTo(map);
-            }
-          }
-        }
-      }
-    }
-
-    for (j = 0; j < this.hobbiesService.malls.length; j++) {
-      if (this.distanceService.calcularDistancia(userPosition, this.housingService.houses[i].direction) <= 1) {
-        for (let category of this.mainComponent.datos) {
-          if (category.checked && category.id === 1) {
-            if (this.distanceService.calcularDistancia(this.housingService.houses[i].direction, this.hobbiesService.malls[j].direction) <= 1) {
-              let popup = new Popup()
-                .setHTML(`<h6>Casa de ${this.housingService.houses[i].contact}</h6>
-                          <p>Contacto: ${this.housingService.houses[i].phone} </p>`);
-              new Marker({ color: 'blue' })
-                .setLngLat(this.housingService.houses[i].direction)
-                .setPopup(popup)
-                .addTo(map);
-            }
-          }
-        }
-      }
-    }
+  this.mapService.setMap(this.map);
   }
 
-this.mapService.setMap(map);
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(this.checkedCategories);
+    if(!this.placesService.userLocation) throw Error("No hay placesService.userLocation")
 
+    let i: number;
+    const userPosition = this.placesService.userLocation;
+    for (i = 0; i < this.housingService.houses.length; i++) {
+      if (this.distanceService.calcularDistancia(userPosition, this.housingService.houses[i].direction) <= 1) {
+        for (let categoryId of this.checkedCategories) {
+          var categoryInfo = this.hobbiesService.getCategoryLocations(categoryId);
+  
+          for (let infoLocation of categoryInfo){
+            let popup = new Popup()
+                .setHTML(`
+                          <img style="max-width: 100%; border-radius: 50 px" src="${infoLocation.image}">
+                          <h2>${infoLocation.name}</h2>`);
+            new Marker({ color: 'yellow' })
+                .setLngLat(infoLocation.direction)
+                .setPopup(popup)
+                .addTo(this.map);
 
-}
+            if (this.distanceService.calcularDistancia(this.housingService.houses[i].direction, infoLocation.direction) <= 1) {
+              let popup = new Popup()
+                .setHTML(`
+                          <img style="max-width: 100%; border-radius: 50 px" src="${this.housingService.houses[i].image}">
+                          <h2>Casa de ${this.housingService.houses[i].contact}</h2>
+                          <p>Contacto: ${this.housingService.houses[i].phone} </p>`);
+              new Marker({ color: 'blue' })
+                .setLngLat(this.housingService.houses[i].direction)
+                .setPopup(popup)
+                .addTo(this.map);
+            }
+          }
+        }
+      }
+    }
+    this.mapService.setMap(this.map);
+  }
 }

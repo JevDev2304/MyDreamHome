@@ -1,9 +1,9 @@
   
-<ul *ngFor="let categoryKey in categories; index as i;">
+<ul *ngFor="let item of categories | keyvalue">
     <li>
         <div class="input-box">
-            <input type="checkbox" class="input-field" id="name" autocomplete="off" required (change)="getAlbumId($event,categoryKey )">
-            <label for="name">{{categories[categoryKey].name}}</label>
+            <input type="checkbox" class="input-field" id="name" autocomplete="off" required (change)="getAlbumId($event,item.key )">
+            <label for="name">{{item.value.name}}</label>
         </div>
     </li>
 </ul>

@@ -34,7 +34,7 @@ export class MainComponent implements OnInit {
   selected: Category[]=[]
 
   updateCheckedCategories(newCheckedCategories: number[]){
-    this.checkedCategories = newCheckedCategories
+    this.checkedCategories = newCheckedCategories;
   }
 
   ngOnInit() {
@@ -58,5 +58,10 @@ export class MainComponent implements OnInit {
   mapIsReady(){
     this.map=true;
     this.currentCheckedCategories = this.checkedCategories;
+    console.log(this.currentCheckedCategories);
+  }
+
+  restart(){
+    window.location.reload()
   }
 }
