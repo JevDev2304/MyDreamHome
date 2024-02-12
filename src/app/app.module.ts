@@ -10,12 +10,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { MapsComponent } from './maps/maps.component';
 import { ModuleMapsModule } from './module-maps/module-maps.module';
+import { CategoriesComponent } from './categories/categories.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     MainComponent,
     MapsComponent,
+    CategoriesComponent,
   ],
   imports: [
     BrowserModule,

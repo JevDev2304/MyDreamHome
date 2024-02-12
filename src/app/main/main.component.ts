@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { OAuthEvent, OAuthService } from 'angular-oauth2-oidc';
 import { Category } from '../models/category.model';
 import { MapService, PlacesService ,DistanceService} from '../module-maps/services';
+
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -11,6 +12,8 @@ import { MapService, PlacesService ,DistanceService} from '../module-maps/servic
 })
 export class MainComponent implements OnInit {
   user: any;
+  checkedCategories: number[] = []
+  currentCheckedCategories: number[] = []
 
   constructor(
     private authService: AuthService,
@@ -29,17 +32,10 @@ export class MainComponent implements OnInit {
   }
   map :boolean = false;
   selected: Category[]=[]
-  datos: Category[] = [
 
-    {name:"⚽  Sport", checked: true, id: 0},
-    {name:"👜 Shopping", checked: true, id: 1},
-    {name:"📽️  Cinema(NOT WORKING)", checked: false, id: 2},
-    {name:"🏛️  Museum(NOT WORKING)", checked: false, id: 3}
-      
-
-      
-  ]
-  
+  updateCheckedCategories(newCheckedCategories: number[]){
+    this.checkedCategories = newCheckedCategories
+  }
 
   ngOnInit() {
     this.loadUserData(); // Load user data on component initialization
@@ -60,20 +56,7 @@ export class MainComponent implements OnInit {
     this.router.navigate(['login']);
   }
   mapIsReady(){
-    this.map=true
+    this.map=true;
+    this.currentCheckedCategories = this.checkedCategories;
   }
-  getAlbumId(e:any, category:Category)
-{
-    if(e.target.checked)
-    {
-        console.log(category.name + 'checked');
-        this.selected.push(category);
-
-    }
-    else{
-        console.log(category.name+ 'Uncheched');
-        this.selected = this.selected.filter(m=>m!=category);
-    }}
-    
 }
-
