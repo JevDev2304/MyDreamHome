@@ -19,15 +19,3 @@
     width: auto;
     border-radius: 16px;
 }
-.input-box {
-    width: 200px;
-    border: 1px dashed blue; /* Borde punteado azul */
-    overflow: hidden; /* Para evitar que el contenido se desborde */
-}
-
-.login-box {
-    margin-top: 20px; /* Ajuste el margen superior según sea necesario */
-    background-color: #f9f9f9; /* Color de fondo */
-    padding: 20px; /* Espaciado interno */
-    border-radius: 8px; /* Borde redondeado */
-}
