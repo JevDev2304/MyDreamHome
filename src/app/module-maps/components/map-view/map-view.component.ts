@@ -5,6 +5,7 @@ import { MainComponent } from '../../../main/main.component';
 import { HousesService } from '../../../services/houses.service';
 import { HobbiesService } from '../../../services/hobbies.service';
 import { CategoriesService } from '../../../services/categories.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-map-view',
@@ -71,7 +72,7 @@ export class MapViewComponent implements AfterViewInit, OnChanges{
                 .setHTML(`
                           <img style="max-width: 100%; border-radius: 50 px" src="${infoLocation.image}">
                           <h2>${infoLocation.name}</h2>`);
-            new Marker({ properties: {}, element: this.createCustomMarkerElement(categoryList[categoryId].url) })
+            new Marker({ element: this.createCustomMarkerElement(categoryList[categoryId].url) })
                 .setLngLat(infoLocation.direction)
                 .setPopup(popup)
                 .addTo(this.map);
@@ -83,8 +84,8 @@ export class MapViewComponent implements AfterViewInit, OnChanges{
                           <h2>Casa de ${this.housingService.houses[i].contact}</h2>
                           <p>Contacto: ${this.housingService.houses[i].phone} </p>
                           <p> ${this.housingService.houses[i].precio}</p>
-                          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                            Launch demo modal
+                          <button type="button" class="btn btn-primary" (click)="pagar()">
+                            Pay
                           </button>
                           `);
               new Marker({ color: 'blue' })
@@ -107,4 +108,14 @@ export class MapViewComponent implements AfterViewInit, OnChanges{
     element.style.height = '128px';
     return element;
   }
+
+  pagar(){
+    Swal.fire({
+      title: "Succes!",
+      text: "The pay process has been succeeded!",
+      icon: "success"
+    });
+  }
+
+
 }

@@ -20,7 +20,7 @@
     <div class="input-box">
         <div class="login-box">
             <div class="login-header" *ngIf="user">
-                <header>{{user.name}} Select your favorite Hobbies :</header>
+                <header>{{user.email}} Select your favorite Hobbies :</header>
             </div>
             <app-categories (categoriesEvent)="updateCheckedCategories($event)"></app-categories>
             <input (click)="mapIsReady()" type="submit" class="input-submit" value="Let's go">
