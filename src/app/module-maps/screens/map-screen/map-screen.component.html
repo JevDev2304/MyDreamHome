@@ -1,8 +1,10 @@
 
+<app-house-details *ngIf="showDetails" [houseInfo]="houseSelected"></app-house-details>
+
 <app-loading *ngIf="!isUserLocationReady; else mapReady"></app-loading>
 <ng-template #mapReady>
-    <app-map-view [checkedCategories]="checkedCategories">
-    </app-map-view>
-    <app-btn-my-location></app-btn-my-location>
-    
-</ng-template>
+<app-map-view [checkedCategories]="checkedCategories" (clickOnHouseEvent)="clickOnHouse($event)">
+</app-map-view>
+<app-btn-my-location></app-btn-my-location>
+
+

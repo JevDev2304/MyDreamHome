@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ViewChild,ElementRef, inject, Input, OnChanges, SimpleChanges} from '@angular/core';
+import { Component, AfterViewInit, ViewChild,ElementRef, inject, Input, OnChanges, SimpleChanges, Output, EventEmitter} from '@angular/core';
 import { MapService, PlacesService ,DistanceService} from '../../services';
 import { Map , Popup, Marker, LngLatLike} from 'mapbox-gl';
 import { MainComponent } from '../../../main/main.component';
@@ -6,6 +6,7 @@ import { HousesService } from '../../../services/houses.service';
 import { HobbiesService } from '../../../services/hobbies.service';
 import { CategoriesService } from '../../../services/categories.service';
 import Swal from 'sweetalert2';
+import { House } from '../../../models/house.model';
 
 @Component({
   selector: 'app-map-view',
@@ -30,6 +31,7 @@ export class MapViewComponent implements AfterViewInit, OnChanges{
   // cambiar icono marcador
 
   @Input() checkedCategories: number[] = [];
+  @Output() clickOnHouseEvent = new EventEmitter<House>();
 
   housingService: HousesService = inject(HousesService)
   hobbiesService: HobbiesService = inject(HobbiesService)
@@ -78,24 +80,22 @@ export class MapViewComponent implements AfterViewInit, OnChanges{
                 .addTo(this.map);
 
             if (this.distanceService.calcularDistancia(this.housingService.houses[i].direction, infoLocation.direction) <= 1) {
-              let popup = new Popup()
-                .setHTML(`
-                          <img style="max-width: 100%; border-radius: 50 px" src="${this.housingService.houses[i].image}">
-                          <h2>Casa de ${this.housingService.houses[i].contact}</h2>
-                          <p>Contacto: ${this.housingService.houses[i].phone} </p>
-                          <p> ${this.housingService.houses[i].precio}</p>
-                          <button type="button" class="btn btn-primary" (click)="pagar()">
-                            Pay
-                          </button>
-                          `);
-              new Marker({ color: 'blue' })
+
+              const getHouseInfo = (id: string) =>{
+                this.clickOnHouseEvent.emit(this.housingService.houses[parseInt(id)]);
+              }
+
+              var marker = new Marker({ color: 'blue' })
                 .setLngLat(this.housingService.houses[i].direction)
-                .setPopup(popup)
                 .addTo(this.map);
+              marker.getElement().id = String(i);
+              marker.getElement().addEventListener('click', function () {
+                getHouseInfo(this.id);
+              });
             }
           }
         }
-      }
+      } 
     }
     this.mapService.setMap(this.map);
   }
@@ -109,13 +109,10 @@ export class MapViewComponent implements AfterViewInit, OnChanges{
     return element;
   }
 
-  pagar(){
-    Swal.fire({
-      title: "Succes!",
-      text: "The pay process has been succeeded!",
-      icon: "success"
-    });
+  clickOnHouse(houseInfo: House){
+    this.clickOnHouseEvent.emit(houseInfo);
   }
+
 
 
 }
