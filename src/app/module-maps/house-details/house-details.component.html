@@ -1,15 +1,20 @@
-<div id="mySidebar" class="sidebar">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-    <a href="#">About</a>
-    <a href="#">Services</a>
-    <a href="#">Clients</a>
-    <a href="#">Contact</a>
-  </div>
+<!-- Sidebar -->
+<div class="w3-sidebar w3-bar-block w3-border-right" [ngStyle]="{'display':sidebarDisplay}" id="mySidebar">
+  <button (click)="closeSidebar()" class="w3-bar-item w3-large">Close &times;</button>
+  <button class="close-button" onclick="toggleInfo()">X</button>
+  <h1>Nombre del lugar</h1>
+  <p class="info-title">Información del lugar</p>
+  <p id="descripcion">Descripción del lugar.</p>
+  <p id="valor">Valor: $100</p>
   
-  <div id="main">
-    <button class="openbtn" onclick="openNav()">☰ Open Sidebar</button>  
-    <h2>Collapsed Sidebar</h2>
-    <p>Click on the hamburger menu/bar icon to open the sidebar, and push this content to the right.</p>
-  </div>
-  
+  <!-- Espacio para el slider de imágenes -->
+      
+      
+      
+      <!-- Puedes agregar más imágenes aquí -->
+   <!-- Botón para pagar -->
+  <button onclick="pagar()">Pagar</button>
+</div>
+
+
 

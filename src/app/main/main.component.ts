@@ -39,8 +39,6 @@ export class MainComponent implements OnInit {
 
   ngOnInit() {
     this.loadUserData(); // Load user data on component initialization
-    
-    console.log(this.user);
   }
 
   loadUserData() {
