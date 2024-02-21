@@ -6,7 +6,7 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { BtnMyLocationComponent } from './components/btn-my-location/btn-my-location.component';
 import { AngularLogoComponent } from './components/angular-logo/angular-logo.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
-import { PopUpInfoComponent } from './components/pop-up-info/pop-up-info.component';
+import { HouseDetailsComponent } from './house-details/house-details.component';
 
 
 
@@ -18,7 +18,7 @@ import { PopUpInfoComponent } from './components/pop-up-info/pop-up-info.compone
     BtnMyLocationComponent,
     AngularLogoComponent,
     SearchBarComponent,
-    PopUpInfoComponent
+    HouseDetailsComponent
   ],
   imports: [
     CommonModule

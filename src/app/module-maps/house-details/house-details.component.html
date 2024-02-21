@@ -1,0 +1,22 @@
+<!-- Sidebar -->
+<div class="w3-sidebar w3-bar-block w3-border-right" [ngStyle]="{'display':sidebarDisplay}" id="mySidebar">
+  <button (click)="closeSidebar()" id= "closeButton" class="w3-bar-item w3-large"> &times;</button>
+  <h1> 🏠 Casa de {{houseInfo?.contact}}</h1>
+  <p class="info-title"> 📞 {{houseInfo?.contact}}</p>
+  <p id="descripcion">ℹ {{houseInfo?.description}}</p>
+  <p id="valor">💰 {{houseInfo?.precio}} COP</p>
+  
+  <img class = "house-img " [src]="houseInfo?.image">
+
+   <!-- Botón para pagar -->
+   <div> 
+  <button (click)="pagar()" class="button button-like">Pagar</button>
+<button (click)="like()" class="button button-like">
+  <i class="fa fa-heart"></i>
+  <span>Like 👍</span>
+</button>
+</div>
+
+
+
+</div>

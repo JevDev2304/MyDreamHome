@@ -1,12 +1,17 @@
-import { Component, AfterViewInit, ViewChild,ElementRef, inject, Input, OnChanges, SimpleChanges} from '@angular/core';
+import { Component, AfterViewInit, ViewChild,ElementRef, inject, Input, OnChanges, SimpleChanges, Output, EventEmitter} from '@angular/core';
 import { MapService, PlacesService ,DistanceService} from '../../services';
 import { Map , Popup, Marker, LngLatLike} from 'mapbox-gl';
 import { MainComponent } from '../../../main/main.component';
 import { HousesService } from '../../../services/houses.service';
 import { HobbiesService } from '../../../services/hobbies.service';
 import { CategoriesService } from '../../../services/categories.service';
+<<<<<<< HEAD
 import { House } from '../../../models/house.model';
 import Swal from 'sweetalert2';
+=======
+import Swal from 'sweetalert2';
+import { House } from '../../../models/house.model';
+>>>>>>> reto-1
 
 @Component({
   selector: 'app-map-view',
@@ -34,6 +39,7 @@ export class MapViewComponent implements AfterViewInit, OnChanges{
   // cambiar icono marcador
 
   @Input() checkedCategories: number[] = [];
+  @Output() clickOnHouseEvent = new EventEmitter<House>();
 
   housingService: HousesService = inject(HousesService)
   hobbiesService: HobbiesService = inject(HobbiesService)
@@ -75,19 +81,31 @@ export class MapViewComponent implements AfterViewInit, OnChanges{
             let popup = new Popup()
                 .setHTML(`
                           <img style="max-width: 100%; border-radius: 50 px" src="${infoLocation.image}">
+<<<<<<< HEAD
                           <h2>${infoLocation.name}</h2>`);
             new Marker({ color: 'yellow'} )
+=======
+                          <h4>${infoLocation.name}</h4>`);
+            new Marker({ element: this.createCustomMarkerElement(categoryList[categoryId].url) })
+>>>>>>> reto-1
                 .setLngLat(infoLocation.direction)
                 .setPopup(popup)
                 .addTo(this.map);
 
             if (this.distanceService.calcularDistancia(this.housingService.houses[i].direction, infoLocation.direction) <= 1) {
+<<<<<<< HEAD
               let popup = new Popup()
+=======
+
+              const getHouseInfo = (id: string) =>{
+                this.clickOnHouseEvent.emit(this.housingService.houses[parseInt(id)]);
+              }
+>>>>>>> reto-1
 
               var marker = new Marker({ color: 'blue' })
                 .setLngLat(this.housingService.houses[i].direction)
-                .setPopup(popup)
                 .addTo(this.map);
+<<<<<<< HEAD
 
                 marker.getElement().addEventListener('click', () => {
                   Swal.fire({
@@ -119,11 +137,17 @@ export class MapViewComponent implements AfterViewInit, OnChanges{
                     cancelButtonAriaLabel: "Thumbs down"
                   });
                 });
+=======
+              marker.getElement().id = String(i);
+              marker.getElement().addEventListener('click', function () {
+                getHouseInfo(this.id);
+              });
+>>>>>>> reto-1
             }
           
           }
         }
-      }
+      } 
     }
     this.mapService.setMap(this.map);
   }
@@ -133,12 +157,22 @@ export class MapViewComponent implements AfterViewInit, OnChanges{
     const element = document.createElement('div');
     element.className = 'custom-marker';
     element.style.backgroundImage = `url(${iconUrl})`;
-    element.style.width = '128px';
-    element.style.height = '128px';
+    element.style.backgroundSize = '40px';
+    element.style.width = '40px';
+    element.style.height = '40px';
     return element;
   }
 
+<<<<<<< HEAD
   ver_mas(houseInfo: House){
     
   }
+=======
+  clickOnHouse(houseInfo: House){
+    this.clickOnHouseEvent.emit(houseInfo);
+  }
+
+
+
+>>>>>>> reto-1
 }
