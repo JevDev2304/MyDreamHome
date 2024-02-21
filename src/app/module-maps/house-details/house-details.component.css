@@ -1,3 +1,108 @@
 #mySidebar {
-    width: 200px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    place-items: center;
+    text-align: center;
+    padding-right: 16px;
+    padding-left: 16px;
+}
+
+#closeButton{
+width: 40px;
+height: 40px;
+background-color: white;
+border-radius: 16px;
+border:none;
+cursor: pointer;
+
+
+}
+
+
+.button-like {
+  border: 2px solid white;
+  background-color: transparent;
+  text-decoration: none;
+  padding: 1rem;
+  position: relative;
+  vertical-align: middle;
+  text-align: center;
+  display: inline-block;
+  border-radius: 2rem;
+  color: blue;
+  transition: all ease 0.4s;
+  cursor: pointer;
+  place-self: center;
+   
+}
+.house-img{
+    border-radius: 16px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    padding: 8px;
+    width:300px;
+   
+    place-self: center;
+    transition: transform .2s;
+}
+.house-img:hover{
+    transform: scale(1.2); 
+}
+
+.button-like span {
+  margin-left: 0.5rem;
+}
+
+.button-like .fa,
+.button-like span {
+  transition: all ease 0.4s;
+}
+
+.button-like:focus {
+  background-color: transparent;
+}
+
+.button-like:focus .fa,
+.button-like:focus span {
+  color: blue;
+}
+
+.button-like:hover {
+  border-color: blue;
+  background-color: transparent;
+}
+
+.button-like:hover .fa,
+.button-like:hover span {
+  color: blue;
+}
+
+.liked {
+  background-color: blue;
+  border-color: blue;
+}
+
+.liked .fa,
+.liked span {
+  color: #fefefe;
+}
+
+.liked:focus {
+  background-color: blue;
+}
+
+.liked:focus .fa,
+.liked:focus span {
+  color: #fefefe;
+}
+
+.liked:hover {
+  background-color: blue;
+  border-color:blue;
+}
+
+.liked:hover .fa,
+.liked:hover span {
+  color: #fefefe;
 }

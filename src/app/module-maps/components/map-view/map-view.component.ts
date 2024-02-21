@@ -73,7 +73,7 @@ export class MapViewComponent implements AfterViewInit, OnChanges{
             let popup = new Popup()
                 .setHTML(`
                           <img style="max-width: 100%; border-radius: 50 px" src="${infoLocation.image}">
-                          <h2>${infoLocation.name}</h2>`);
+                          <h4>${infoLocation.name}</h4>`);
             new Marker({ element: this.createCustomMarkerElement(categoryList[categoryId].url) })
                 .setLngLat(infoLocation.direction)
                 .setPopup(popup)
@@ -104,8 +104,9 @@ export class MapViewComponent implements AfterViewInit, OnChanges{
     const element = document.createElement('div');
     element.className = 'custom-marker';
     element.style.backgroundImage = `url(${iconUrl})`;
-    element.style.width = '128px';
-    element.style.height = '128px';
+    element.style.backgroundSize = '40px';
+    element.style.width = '40px';
+    element.style.height = '40px';
     return element;
   }
 

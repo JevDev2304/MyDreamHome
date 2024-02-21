@@ -1,20 +1,22 @@
 <!-- Sidebar -->
 <div class="w3-sidebar w3-bar-block w3-border-right" [ngStyle]="{'display':sidebarDisplay}" id="mySidebar">
-  <button (click)="closeSidebar()" class="w3-bar-item w3-large">Close &times;</button>
-  <button class="close-button" onclick="toggleInfo()">X</button>
-  <h1>Nombre del lugar</h1>
-  <p class="info-title">Información del lugar</p>
-  <p id="descripcion">Descripción del lugar.</p>
-  <p id="valor">Valor: $100</p>
+  <button (click)="closeSidebar()" id= "closeButton" class="w3-bar-item w3-large"> &times;</button>
+  <h1> 🏠 Casa de {{houseInfo?.contact}}</h1>
+  <p class="info-title"> 📞 {{houseInfo?.contact}}</p>
+  <p id="descripcion">ℹ {{houseInfo?.description}}</p>
+  <p id="valor">💰 {{houseInfo?.precio}} COP</p>
   
-  <!-- Espacio para el slider de imágenes -->
-      
-      
-      
-      <!-- Puedes agregar más imágenes aquí -->
+  <img class = "house-img " [src]="houseInfo?.image">
+
    <!-- Botón para pagar -->
-  <button onclick="pagar()">Pagar</button>
+   <div> 
+  <button (click)="pagar()" class="button button-like">Pagar</button>
+<button (click)="like()" class="button button-like">
+  <i class="fa fa-heart"></i>
+  <span>Like 👍</span>
+</button>
 </div>
 
 
 
+</div>

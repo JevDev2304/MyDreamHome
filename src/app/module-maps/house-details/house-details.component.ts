@@ -38,11 +38,19 @@ export class HouseDetailsComponent implements OnChanges {
       link_image: this.houseInfo?.image,
       userMail: this.user.email,
       });
-
-      alert("enviado");
   }
 
   closeSidebar(){
     this.sidebarDisplay = "none";
+  }
+
+  like(){
+    this.loadUserData();
+    this.send();
+    alert("The house information has been sent to your email !")
+  }
+
+  pagar(){
+    alert("The payment has been successful !")
   }
 }
