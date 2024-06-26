@@ -53,7 +53,7 @@ We welcome contributions! Feel free to submit issues, fork the repository, and m
 
 ## 📞 Contact
 
-For any questions or suggestions, please contact us at [your-email@example.com](mailto:jevojob@gmail.com).
+For any questions or suggestions, please contact us at [jevojob@gmail.com](mailto:jevojob@gmail.com).
 
 ---
 
