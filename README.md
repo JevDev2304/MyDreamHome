@@ -50,9 +50,6 @@ This app relies on the Mapbox API and Google API to function correctly. Ensure y
 
 We welcome contributions! Feel free to submit issues, fork the repository, and make pull requests. For major changes, please open an issue first to discuss what you would like to change.
 
-## 📄 License
-
-This project is licensed under the MIT License.
 
 ## 📞 Contact
 
